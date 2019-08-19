@@ -27,9 +27,9 @@ namespace Aspnet_Bigquery.Controllers
         {
             var client = _bigQuery.GetBigqueryClient();
 
-            var dataset = client.GetOrCreateDataset("YOUR DATASET");
+            var dataset = client.GetOrCreateDataset("babynames");
 
-            var table = dataset.GetOrCreateTable("YOUR TABLE", new TableSchemaBuilder
+            var table = dataset.GetOrCreateTable("tblfile", new TableSchemaBuilder
             {
                 { "fileid", BigQueryDbType.String },
                 { "category", BigQueryDbType.String },
@@ -57,7 +57,7 @@ namespace Aspnet_Bigquery.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var query = "YOUR QUERY HERE, FOLLOWING THE FIELDS ORDER DEFINED ABOVE";
+            var query = "select * from tblfile";
 
             var rows = _bigQuery.GetRows(query);
 

@@ -11,7 +11,7 @@ namespace Aspnet_Bigquery.Bigquery
 {
     public class BQ : IBQ
     {
-        const string PROJECT_ID = "YOUR_PROJECT_ID";
+        const string PROJECT_ID = "aspnet-bigquery-sample";
 
         readonly IHostingEnvironment _hostingEnvironment;
 
