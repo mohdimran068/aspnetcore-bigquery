@@ -42,8 +42,8 @@ namespace Aspnet_Bigquery.Controllers
                 new BigQueryInsertRow
                 {
                     { "fileid", Guid.NewGuid().ToString() },
-                    { "category", f.Category },
-                    { "status", f.Status }
+                    { "category", f.gender },
+                    { "status", f.count }
                 }));
 
             if (bqRows.Count > 1)
@@ -57,18 +57,17 @@ namespace Aspnet_Bigquery.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var query = "select * from tblfile";
+            var query = "select * from babynames.names2010";
 
             var rows = _bigQuery.GetRows(query);
 
             var result = new List<File>();
             rows.ForEach(row => result.Add(new File
             {
-                Id = row.F[ORDER_ID].V.ToString(),
-                Category = row.F[ORDER_CATEGORY].V.ToString(),
-                Status = row.F[ORDER_STATUS].V.ToString()
+                name = row.F[ORDER_ID].V.ToString(),
+                gender = row.F[ORDER_CATEGORY].V.ToString(),
+                count = Convert.ToInt32(row.F[ORDER_STATUS].V)
             }));
-
             return Ok(result);
         }
     }
